@@ -15,7 +15,7 @@ export default function App() {
     <div className="container">
       <h1>Speak no evil</h1>
       <h2>See no evil</h2>
-      <p>Backend status: {status}</p>
+      <p>Backend: {status}</p>
       < ApiButton />
     </div>
   )
