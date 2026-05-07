@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  docker:
+  docker-frontend-build-and-push:
     permissions:
       contents: read
       packages: write
