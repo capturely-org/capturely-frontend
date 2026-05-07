@@ -11,7 +11,7 @@ const ApiButton = () => {
     setImageUrl(null);
 
     try {
-      const response = await fetch("https://api.capturely.co.uk/image");
+      const response = await fetch("https://api.capturely.co.uk/images");
 
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 

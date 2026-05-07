@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import ApiButton from './Button'
+import ImageUploader from './ImageUploader'
 import { getHealth } from './api/client'
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
       <h1>Speak no evil</h1>
       <h2>See no evil</h2>
       <p>Backend: {status}</p>
-      < ApiButton />
+      <ApiButton />
+      <ImageUploader />
     </div>
   )
 }
