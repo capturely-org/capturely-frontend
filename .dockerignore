@@ -1,0 +1,39 @@
+# Dependencies (IMPORTANT)
+node_modules/
+
+# Build output (we build inside Docker or CI)
+dist/
+dist-ssr/
+
+# Git
+.git
+.gitignore
+
+# Environment files (don’t bake secrets into image)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Testing / coverage
+coverage/
+
+# Temporary/cache
+tmp/
+temp/
+.cache/
+
+# Docker files
+docker-compose*.yml
+Dockerfile*
