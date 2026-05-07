@@ -1,0 +1,42 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    permissions:
+      contents: read
+      packages: write
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: |
+          docker build -t capturely-frontend:latest .
+
+      - name: Login to DockerHub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Tag image
+        run: |
+          docker tag capturely-frontend:latest ${{ secrets.DOCKER_USERNAME }}/capturely-frontend:${{ github.sha }}
+          docker tag capturely-frontend:latest ${{ secrets.DOCKER_USERNAME }}/capturely-frontend:latest
+
+      - name: Push image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/capturely-frontend:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/capturely-frontend:latest
+
+      - name: Cleanup local Docker images
+        run: |
+          docker rmi -f capturely-frontend:latest || true
+          docker rmi -f ${{ secrets.DOCKER_USERNAME }}/capturely-frontend:${{ github.sha }} || true
+          docker rmi -f ${{ secrets.DOCKER_USERNAME }}/capturely-frontend:latest || true
+
+          docker image prune -f
